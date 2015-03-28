@@ -1,7 +1,9 @@
-__author__ = "ed"
+__author__ = "T31337"
+#modified by Edwin
 
 import tkinter.ttk, socket
 from tkinter import messagebox, Label, Spinbox, Tk, Entry, E, W, END, WORD, Button, Text
+
 
 class PortScanner:
     def __init__(self):
@@ -30,6 +32,29 @@ class PortScanner:
 
             mGUI.mainloop() #Show GUI Window
 
+    def pscan(self,port):
+            try:
+                target = self.srvr.get()
+                s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+                s.connect((target,port))
+                return True
+            except:
+                return False
 
+    def scan(self):
+        self.txt.delete(0.0, END)
+        print('Scanning', self.srvr.get())
+        for x in range(int(self.spnr.get()), int(self.spnr2.get())+1):
+            if self.pscan(x):
+                print('Port: ',x,'Is Open!')
+                msg = "Port "+str(x)+" Is Open!\n"
+                self.txt.insert(0.0,msg)
+            else:
+                print('port: ',x,'Is Closed!')
+                #msg = "Port "+str(x)+" Is Closed!\n"
+                #txt.insert(0.0,msg)
+
+
+        messagebox.showinfo(title="PyPortScanner!", message="Scan Completed!")
 
 ps = PortScanner()
