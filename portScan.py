@@ -44,7 +44,7 @@ class StartPage(tk.Frame):
         def __init__(self, parent, controller):
             tk.Frame.__init__(self, parent)
             label = tk.Label(self, text="Start Page", font="LARGE_FONT")
-            label.pack()
+            label.grid()
 
 
             self.srvr = Entry(self,textvariable="server")
@@ -65,7 +65,7 @@ class StartPage(tk.Frame):
             btn = Button(self,text="Commence Port Scan!",command=self.scan)
             btn.grid(row=3,column=1,sticky=W)
             self.txt = Text(self,width=50,height=20,wrap=WORD)
-            self.txt.grid(row=4,column=0,columnspan=2,sticky=tk.WEST)
+            self.txt.grid(row=4,column=0,columnspan=2,sticky=W)
 
             self.txt.insert(0.0,'Open Ports Will Appear Here After Scan Completes!')
 
@@ -73,7 +73,7 @@ class StartPage(tk.Frame):
 
             button1 = tk.Button(self, text="Visit Page 1",
                                 command=lambda: controller.show_frame(PageOne))
-            button1.pack()
+            button1.grid(row=3,column=1,sticky=W)
 
 
     except Exception as e:
@@ -107,29 +107,29 @@ class PageOne(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="Page One", font="LARGE_FONT")
-        label.pack(pady=10, padx=10)
+        label.grid(pady=10, padx=10)
 
         button1 = tk.Button(self, text="Back to Home",
                             command=lambda: controller.show_frame(StartPage))
-        button1.pack()
+        button1.grid()
         button3 = tk.Button(self, text="Page two",
                             command=lambda: controller.show_frame(PageTwo))
-        button3.pack()
+        button1.grid(row=3,column=1,sticky=W)
 
 class PageTwo(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="Page Two", font="LARGE_FONT")
-        label.pack(pady=10, padx=10)
+        label.grid(pady=10, padx=10)
 
 
         button2 = tk.Button(self, text="Page One",
                             command=lambda: controller.show_frame(PageOne))
-        button2.pack()
+        button2.grid(row=3,column=1,sticky=W)
 
         button1 = tk.Button(self, text="Back to Home",
                             command=lambda: controller.show_frame(StartPage))
-        button1.pack()
+        button1.grid(row=3,column=1,sticky=W)
 
 
 ps = PortScanner()
