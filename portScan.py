@@ -1,5 +1,18 @@
 __author__ = "T31337"
 #modified by Edwin
+"""Hey guys  I wanted a decent basic GUI (I love gui's dont judge) for
+looking at what ports are open and also a reference to what they do.  I also wanted to be able to
+close them which I couldnt find in a gui.  Why would you need this?
+
+Django/framework developers - Isnt it annoying when your port doesnt close
+and you have to run kill commands?
+
+Keep this open near your terminal and good to go!
+
+
+Also Great for security.  Never know when your leaving a back door open.
+
+"""
 
 import tkinter.ttk, socket
 from tkinter import messagebox, Label, Spinbox, Tk, Entry, E, W, END, WORD, Button, Text
