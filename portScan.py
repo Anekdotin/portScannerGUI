@@ -3,7 +3,7 @@ __author__ = "T31337"
 
 import tkinter.ttk, socket
 import tkinter as tk
-from tkinter import messagebox, Label, Spinbox, Tk, Entry, E, W, END, WORD, Button, Text
+from tkinter import messagebox, Label, Spinbox, Tk, Entry, END, WORD, Button, Text, W
 
 
 LARGE_FONT = ("Verdana", 12)
@@ -38,36 +38,46 @@ class PortScanner(tk.Tk):
 
 
 class StartPage(tk.Frame):
+    try:
 
 
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        mGUI = Tk.Frame(self) #create tk reference object AKA Make A Window/Frame
+        def __init__(self, parent, controller):
+            tk.Frame.__init__(self, parent)
+            label = tk.Label(self, text="Start Page", font="LARGE_FONT")
+            label.pack()
 
 
-        self.srvr = Entry(mGUI,textvariable="server")
-        self.srvr.setvar(name="server",value='127.0.0.1')
-        self.srvr.grid(row=0,column=1,sticky=W)
-        lbl = Label(mGUI,text="Target Address:")
-        lbl.grid(row=0,column=0,sticky=W)
-        self.spnr = Spinbox(mGUI,from_=1,to=49152,value=1)
-        self.spnr.grid(row=1,column=1,sticky=W)
-        lbl2 = Label(mGUI,text="Starting Port:")
-        lbl2.grid(row=1,column=0,sticky=W)
-        self.spnr.grid(row=1,column=1,sticky=W)
-        self.spnr2 = Spinbox(mGUI,from_=1,to=49152,value=49152)
-        self.spnr2.grid(row=2,column=1,sticky=W)
-        lbl3 = Label(mGUI,text="Ending Port")
-        lbl3.grid(row=2,column=0,sticky=W)
-        #mGUI.resizable(width=False,height=False) #Make Window Size Static (Not Resizeable)
-        btn = Button(mGUI,text="Commence Port Scan!",command=self.scan)
-        btn.grid(row=3,column=1,sticky=W)
-        self.txt = Text(mGUI,width=50,height=20,wrap=WORD)
-        self.txt.grid(row=4,column=0,columnspan=2,sticky=W)
-        mGUI.title('PyPortScanner!') #set Title Of Window
-        self.txt.insert(0.0,'Open Ports Will Appear Here After Scan Completes!')
+            self.srvr = Entry(self,textvariable="server")
+            self.srvr.setvar(name="server",value='127.0.0.1')
+            self.srvr.grid(row=0,column=1,sticky=W)
+            lbl = Label(self,text="Target Address:")
+            lbl.grid(row=0,column=0,sticky=W)
+            self.spnr = Spinbox(self,from_=1,to=49152,value=1)
+            self.spnr.grid(row=1,column=1,sticky=W)
+            lbl2 = Label(self,text="Starting Port:")
+            lbl2.grid(row=1,column=0,sticky=W)
+            self.spnr.grid(row=1,column=1,sticky=W)
+            self.spnr2 = Spinbox(self,from_=1,to=49152,value=49152)
+            self.spnr2.grid(row=2,column=1,sticky=W)
+            lbl3 = Label(self,text="Ending Port")
+            lbl3.grid(row=2,column=0,sticky=W)
 
-        mGUI.mainloop() #Show GUI Window
+            btn = Button(self,text="Commence Port Scan!",command=self.scan)
+            btn.grid(row=3,column=1,sticky=W)
+            self.txt = Text(self,width=50,height=20,wrap=WORD)
+            self.txt.grid(row=4,column=0,columnspan=2,sticky=tk.WEST)
+
+            self.txt.insert(0.0,'Open Ports Will Appear Here After Scan Completes!')
+
+
+
+            button1 = tk.Button(self, text="Visit Page 1",
+                                command=lambda: controller.show_frame(PageOne))
+            button1.pack()
+
+
+    except Exception as e:
+        print("failed because of:", e)
 
     def pscan(self,port):
             try:
